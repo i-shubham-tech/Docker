@@ -25,7 +25,7 @@
 - [Dockerfile Explanation](#dockerfile-explanation)
 - [Docker Network](#docker-network)
 - [Docker Volume](#docker-volume)
-- [Docker Compose Overview](#docker-compose-overview)
+- [Docker Compose File](#docker-compose-file)
 - [Managing Containers and Images](#-managing-containers-and-images)
 - [Troubleshooting](#-troubleshooting)
 - [Best Practices](#-best-practices)
