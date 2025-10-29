@@ -16,8 +16,8 @@
 ---
 
 ## 📑 Table of Contents
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
+- [Introduction](#-introduction)
+- [Prerequisites](#-prerequisites)
 - [Installation Steps](#installation-steps)
 - [Docker Architecture Overview](#docker-architecture-overview)
 - [Key Concepts](#-key-concepts)
