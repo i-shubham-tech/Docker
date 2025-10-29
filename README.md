@@ -144,4 +144,72 @@ docker run -d -p 3000:3000 --name mynode node:18
 # Access the container shell
 docker exec -it mynode bash
 
+```
+---
+
+## Dockerfile Explanation
+
+### 🧩 1.  Definition
+A **Dockerfile** is a text file that contains a set of instructions to build a Docker image automatically.  
+It defines what goes inside the image — such as base OS, dependencies, application files, and startup commands.
+
+---
+
+### ⚙️ 2. Common Dockerfile Commands
+
+| **Instruction** | **Description** | **Example** |
+|------------------|-----------------|--------------|
+| `FROM` | Specifies the base image to use. | `FROM node:18` |
+| `WORKDIR` | Sets the working directory inside the container. | `WORKDIR /app` |
+| `COPY` | Copies files/folders from host to container. | `COPY . .` |
+| `ADD` | Similar to COPY but can also extract `.tar` files or fetch URLs. | `ADD app.tar.gz /app` |
+| `RUN` | Executes commands during image build (e.g., install dependencies). | `RUN npm install` |
+| `EXPOSE` | Informs Docker which port the container listens on. | `EXPOSE 3000` |
+| `ENV` | Sets environment variables inside the image. | `ENV NODE_ENV=production` |
+| `CMD` | Specifies default command to run when container starts . | `CMD ["node", "server.js"]` |
+| `ENTRYPOINT` | Configures a container that will run as an executable. | `ENTRYPOINT ["npm", "start"]` |
+| `USER` | Sets the username or UID to use when running the image. | `USER node` |
+| `LABEL` | Adds metadata to the image. | `LABEL version="1.0"` |
+
+NOTE: `CMD` can be overwrite during container running ||
+      `ENTRYPOINT` cannot be overwrite
+
+---
+
+### 🧱 3. Example Dockerfile
+
+```dockerfile
+# Use an official Node.js image as the base
+FROM node:18
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy project files into container
+COPY . .
+
+# Expose application port
+EXPOSE 3000
+
+# Command to run the application
+CMD ["npm", "start"]
+```
+
+### 🧱 4. Build image
+
+```bash
+# Build Docker image ('.' means current directory)
+docker build -t mynodeapp .
+
+# Verify the image
+docker images
+
+# Run container from image
+docker run -d -p 3000:3000 --name mynode mynodeapp
+
+```
 
