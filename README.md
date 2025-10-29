@@ -52,14 +52,28 @@ Before using Docker, ensure you have the following:
 - **Basic Knowledge:** Command-line usage  
 
 ---
+---
 
 ## 🪜 Installation Steps
-<details>
-  <summary>📦 Click to expand installation guide</summary>
-
-### 🪟 Windows
+- 🪟 Windows
 1. Download **Docker Desktop** from [Docker Hub](https://www.docker.com/products/docker-desktop/).  
 2. Run the installer and follow on-screen instructions.  
 3. Verify installation:  
    ```bash
    docker --version
+---
+
+## 🏗️ Docker Architecture Overview
+
+- Docker uses a client–server architecture:
+- Docker Client: CLI tool that communicates with the daemon.
+- Docker Daemon (dockerd): Manages images, containers, and volumes.
+- Docker Images: Immutable templates used to create containers.
+- Docker Containers: Running instances of images.
+- Docker Registry: Stores Docker images (e.g., Docker Hub).
+
+<p align="center"> <img src="https://techlearners.blog/wp-content/uploads/2025/06/Docker-Ecosystem.drawio.svg" width="600" radius=20 alt="Docker Architecture Diagram"/> </p>
+
+
+
+
