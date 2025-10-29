@@ -44,7 +44,7 @@ It ensures consistency across multiple environments — from development to prod
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 Before using Docker, ensure you have the following:
 - **Operating System:** Windows 10/11, macOS, or any Linux distribution  
 - **Memory:** Minimum 4 GB RAM  
