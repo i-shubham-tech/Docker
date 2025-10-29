@@ -52,7 +52,6 @@ Before using Docker, ensure you have the following:
 - **Basic Knowledge:** Command-line usage  
 
 ---
----
 
 ## 🪜 Installation Steps
 - 🪟 Windows
@@ -74,6 +73,6 @@ Before using Docker, ensure you have the following:
 
 <p align="center"> <img src="https://techlearners.blog/wp-content/uploads/2025/06/Docker-Ecosystem.drawio.svg" width="600" radius=20 alt="Docker Architecture Diagram"/> </p>
 
-
+---
 
 
