@@ -27,6 +27,9 @@
 - [Docker Volume](#docker-volume)
 - [Docker Compose File](#docker-compose-file)
 - [Multi-Stage Dockerfile](#multi-stage-dockerfile)
+- [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+- [References](#references)
 
 
 ---
@@ -442,7 +445,38 @@ docker run -d -p 3000:3000 --name mynodeapp mynode-multistage
 
 ```
 
+## Troubleshooting
 
+| **Issue** | **Possible Fix** |
+|------------|------------------|
+| **Port already in use** | Stop conflicting process or change port mapping. |
+| **Permission denied** | Run with `sudo` or add user to the `docker` group. |
+| **Container won’t start** | Check logs using `docker logs <container_id>`. |
+
+---
+
+## Best Practices
+
+- Use `.dockerignore` to reduce image size.  
+- Use **multi-stage builds** for optimization.  
+- Keep containers **stateless**.  
+- Tag images with proper **version numbers**.  
+- Regularly clean up unused images and containers.  
+
+---
+
+## References
+
+- [📘 Official Docker Documentation](https://docs.docker.com/)  
+- [🐳 Docker Hub](https://hub.docker.com/)  
+- [📄 Dockerfile Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)  
+- [⚙️ Compose File Reference](https://docs.docker.com/compose/compose-file/)  
+
+---
+
+<p align="center">
+  <b>💙 Built with Docker — Simplify. Ship. Run. 💙</b>
+</p>
 
 
 
