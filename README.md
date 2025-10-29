@@ -75,6 +75,17 @@ Before using Docker, ensure you have the following:
 
 ---
 
+## 🧱 Key Concepts
+
+| **Concept** | **Description** |
+|--------------|----------------|
+| **Image** | A blueprint for creating containers. |
+| **Container** | A lightweight, isolated runtime environment. |
+| **Volume** | A mechanism for data persistence. |
+| **Network** | Allows containers to communicate securely. |
+
+---
+
 ## Common Docker Commands
 
 ### 🧱 Docker Image Commands
