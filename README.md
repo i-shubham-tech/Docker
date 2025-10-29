@@ -300,4 +300,82 @@ docker volume rm myvolume
 ```
 ---
 
+## Docker Compose File
+
+### 🧱 1. Definition
+A **Docker Compose file** (`docker-compose.yml`) is a YAML configuration file that defines how multiple Docker containers work together in a single application.  
+It allows you to define **services**, **networks**, and **volumes** in one place — making it easy to start, stop, and manage multi-container applications with a single command.
+
+---
+
+### ⚙️ 2. Common Docker Compose Commands
+
+| **Command** | **Description** | **Example** |
+|--------------|----------------|--------------|
+| `docker compose up` | Build and start all services. | `docker compose up` |
+| `docker compose up -d` | Run services in detached (background) mode. | `docker compose up -d` |
+| `docker compose down` | Stop and remove all containers, networks, and volumes. | `docker compose down` |
+| `docker compose ps` | List all running services. | `docker compose ps` |
+| `docker compose build` | Build or rebuild services. | `docker compose build` |
+| `docker compose logs` | View logs of all running services. | `docker compose logs` |
+| `docker compose exec <service> <command>` | Execute a command in a running service container. | `docker compose exec app bash` |
+| `docker compose stop` | Stop running containers without removing them. | `docker compose stop` |
+| `docker compose restart` | Restart all services. | `docker compose restart` |
+
+---
+
+### 📜 3. Example `docker-compose.yml` File
+
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: mynodeapp
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mydb
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+volumes:
+  db_data:
+
+networks:
+  mynetwork:
+```
+
+```bash
+# Step 1: Start all containers (build if needed)
+docker compose up -d
+
+# Step 2: View running services
+docker compose ps
+
+# Step 3: Access container terminal
+docker compose exec app bash
+
+# Step 4: Stop and remove all containers, networks, and volumes
+docker compose down
+
+```
+
+---
+
+
 
