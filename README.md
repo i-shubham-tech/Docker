@@ -23,7 +23,7 @@
 - [Key Concepts](#-key-concepts)
 - [Common Docker Commands](#common-docker-commands)
 - [Dockerfile Explanation](#dockerfile-explanation)
-- [Networking in Docker](#networking-in-docker)
+- [Docker Network](#docker-network)
 - [Volume](#volume)
 - [Docker Compose Overview](#docker-compose-overview)
 - [Managing Containers and Images](#-managing-containers-and-images)
@@ -212,4 +212,46 @@ docker images
 docker run -d -p 3000:3000 --name mynode mynodeapp
 
 ```
+---
+
+## Docker Network
+
+### 🧩 1. Definition
+A **Docker Network** allows containers to communicate with each other and with the host system securely.  
+It provides isolated environments for containers, ensuring controlled communication and easy service discovery.  
+Docker automatically manages networking so containers can interact using container names instead of IPs.
+
+---
+
+### ⚙️ 2. Common Docker Network Commands
+
+| **Command** | **Description** | **Example** |
+|--------------|----------------|--------------|
+| `docker network ls` | List all existing Docker networks. | `docker network ls` |
+| `docker network inspect <network>` | Show detailed info about a network. | `docker network inspect bridge` |
+| `docker network create <network>` | Create a new custom network. | `docker network create mynetwork` |
+| `docker network rm <network>` | Remove a specific network. | `docker network rm mynetwork` |
+| `docker network connect <network> <container>` | Connect a container to a network. | `docker network connect mynetwork mycontainer` |
+| `docker network disconnect <network> <container>` | Disconnect a container from a network. | `docker network disconnect mynetwork mycontainer` |
+
+---
+
+### 🧱 3. Example in Bash
+
+```bash
+# Step 1: Create a custom Docker network
+docker network create mynetwork
+
+# Step 2: Run a MySQL container on that network
+docker run -d --name mysql-db --network mynetwork -e MYSQL_ROOT_PASSWORD=root mysql:latest
+
+# Step 3: Run a Node.js app container on the same network
+docker run -d --name node-app --network mynetwork -p 3000:3000 mynodeapp
+
+# Step 4: Verify both containers are connected to the same network
+docker network inspect mynetwork
+
+```
+---
+
 
