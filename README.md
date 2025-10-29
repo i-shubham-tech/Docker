@@ -16,8 +16,8 @@
 ---
 
 ## 📑 Table of Contents
-- [Introduction](#-introduction)
-- [Prerequisites](#-prerequisites)
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
 - [Installation Steps](#installation-steps)
 - [Docker Architecture Overview](#docker-architecture-overview)
 - [Key Concepts](#-key-concepts)
@@ -33,7 +33,7 @@
 
 ---
 
-## 🧩 Introduction
+## Introduction
 Docker is an open-source platform that enables developers to automate the deployment of applications inside lightweight, portable containers.  
 It ensures consistency across multiple environments — from development to production — by packaging code, runtime, libraries, and dependencies together.
 
@@ -53,7 +53,7 @@ Before using Docker, ensure you have the following:
 
 ---
 
-## 🪜 Installation Steps
+## Installation Steps
 - 🪟 Windows
 1. Download **Docker Desktop** from [Docker Hub](https://www.docker.com/products/docker-desktop/).  
 2. Run the installer and follow on-screen instructions.  
@@ -62,7 +62,7 @@ Before using Docker, ensure you have the following:
    docker --version
 ---
 
-## 🏗️ Docker Architecture Overview
+## Docker Architecture Overview
 
 - Docker uses a client–server architecture:
 - Docker Client: CLI tool that communicates with the daemon.
