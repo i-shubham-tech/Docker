@@ -21,7 +21,7 @@
 - [Installation Steps](#installation-steps)
 - [Docker Architecture Overview](#docker-architecture-overview)
 - [Key Concepts](#-key-concepts)
-- [Common Docker Commands](#-common-docker-commands)
+- [Common Docker Commands](#common-docker-commands)
 - [Dockerfile Explanation](#-dockerfile-explanation)
 - [Docker Compose Overview](#-docker-compose-overview)
 - [Managing Containers and Images](#-managing-containers-and-images)
@@ -74,5 +74,63 @@ Before using Docker, ensure you have the following:
 <p align="center"> <img src="https://techlearners.blog/wp-content/uploads/2025/06/Docker-Ecosystem.drawio.svg" width="600" radius=20 alt="Docker Architecture Diagram"/> </p>
 
 ---
+
+## Common Docker Commands
+
+### 🧱 Docker Image Commands
+
+| **Command** | **Description** | **Example** |
+|--------------|----------------|--------------|
+| `docker pull <image>` | Download an image from Docker Hub. | `docker pull node:18` |
+| `docker images` | List all downloaded images. | `docker images` |
+| `docker rmi <image>` | Remove an image. | `docker rmi node:18` |
+| `docker image inspect <image-id>` | Inspect detailed info about an image. | `docker image inspect node:18` |
+
+---
+
+### 📦 Docker Container Commands
+
+| **Command** | **Description** | **Example** |
+|--------------|----------------|--------------|
+| `docker run <image>` | Create and start a new container. | `docker run node:18` |
+| `docker run -idt <image>` | Run container continuously in background. | `docker run -idt node:18` |
+| `docker ps` | List active containers. | `docker ps` |
+| `docker ps -a` | List all containers (active + stopped). | `docker ps -a` |
+| `docker stop <id>` | Stop a running container. | `docker stop 8f9a1c3b2d` |
+| `docker start <id>` | Start a stopped container. | `docker start 8f9a1c3b2d` |
+| `docker restart <id>` | Restart a running container. | `docker restart 8f9a1c3b2d` |
+| `docker rm <id>` | Remove a container. | `docker rm 8f9a1c3b2d` |
+| `docker exec -it <id> bash` | Access container terminal interactively. | `docker exec -it 8f9a1c3b2d bash` |
+| `docker inspect <id>` | View container details (config, network, mounts, etc.). | `docker inspect 8f9a1c3b2d` |
+| `docker attach <id>` | Attach terminal to running container. | `docker attach 8f9a1c3b2d` |
+
+---
+
+### ⚙️ Common Docker Options (Flags)
+
+| **Flag** | **Description** | **Example** |
+|-----------|----------------|--------------|
+| `-d` | Run container in detached (background) mode. | `docker run -d nginx` |
+| `-p` | Map container port to host port. | `docker run -p 8080:80 nginx` |
+| `-e` | Set environment variable inside container. | `docker run -e MYSQL_ROOT_PASSWORD=root mysql` |
+| `-it` | Allocate a pseudo-TTY (interactive terminal). | `docker run -it ubuntu` |
+| `-u` | Specify a username. | `docker exec -u root -it container bash` |
+| `-h` | Assign hostname to container. | `docker run -h mycontainer ubuntu` |
+| `--name` | Assign a custom name to container. | `docker run --name myapp nginx` |
+| `--force` | Forcefully remove running container/image. | `docker rm --force myapp` |
+
+---
+
+### 💡 Example: Running a Node.js Container
+
+```bash
+# Pull the official Node image
+docker pull node:18
+
+# Run Node container in detached mode with port mapping and a custom name
+docker run -d -p 3000:3000 --name mynode node:18
+
+# Access the container shell
+docker exec -it mynode bash
 
 
