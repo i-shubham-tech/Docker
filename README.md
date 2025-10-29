@@ -26,10 +26,8 @@
 - [Docker Network](#docker-network)
 - [Docker Volume](#docker-volume)
 - [Docker Compose File](#docker-compose-file)
-- [Managing Containers and Images](#-managing-containers-and-images)
-- [Troubleshooting](#-troubleshooting)
-- [Best Practices](#-best-practices)
-- [References](#-references)
+- [Multi-Stage Dockerfile](#multi-stage-dockerfile)
+
 
 ---
 
@@ -376,6 +374,75 @@ docker compose down
 ```
 
 ---
+## Multi-Stage Dockerfile
+
+### 🧩 1. Definition
+A **Multi-Stage Dockerfile** is a powerful feature that allows you to use **multiple `FROM` instructions** in one Dockerfile.  
+Each `FROM` starts a new build stage, letting you separate **build dependencies** from **runtime environment**.  
+This reduces final image size and improves security by keeping only what’s needed to run your application.
+
+---
+
+### ⚙️ 2. Common Commands & Concepts
+
+| **Command / Concept** | **Description** | **Example** |
+|------------------------|----------------|--------------|
+| `FROM` | Starts a new build stage. | `FROM node:18 AS builder` |
+| `AS <name>` | Names a build stage for reference. | `FROM node:18 AS build` |
+| `COPY --from=<name>` | Copies files from a previous stage. | `COPY --from=build /app/dist /app/dist` |
+| `RUN` | Executes commands in the current stage. | `RUN npm install && npm run build` |
+| `WORKDIR` | Sets working directory inside container. | `WORKDIR /app` |
+| `CMD` | Defines the command to run at container start. | `CMD ["npm", "start"]` |
+
+---
+
+### 🧱 3. Example: Multi-Stage Dockerfile for Node.js App
+
+```dockerfile
+# ---------- Stage 1: Build ----------
+FROM node:18 AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy all source code and build the app
+COPY . .
+RUN npm run build
+
+# ---------- Stage 2: Run ----------
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy only build output and dependencies from build stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package*.json ./
+
+# Install only production dependencies
+RUN npm install --only=production
+
+# Expose application port
+EXPOSE 3000
+
+# Run the application
+CMD ["node", "dist/server.js"]
+
+```
+```bash
+# Step 1: Build the image
+docker build -t mynode-multistage .
+
+# Step 2: Run the container
+docker run -d -p 3000:3000 --name mynodeapp mynode-multistage
+
+```
+
+
 
 
 
