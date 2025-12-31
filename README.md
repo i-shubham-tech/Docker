@@ -108,13 +108,13 @@ Before using Docker, ensure you have the following:
 | `docker run -idt <image>` | Run container continuously in background. | `docker run -idt node:18` |
 | `docker ps` | List active containers. | `docker ps` |
 | `docker ps -a` | List all containers (active + stopped). | `docker ps -a` |
+| `docker rm <id>` | Remove a container. | `docker rm 8f9a1c3b2d` |
 | `docker stop <id>` | Stop a running container. | `docker stop 8f9a1c3b2d` |
 | `docker start <id>` | Start a stopped container. | `docker start 8f9a1c3b2d` |
 | `docker restart <id>` | Restart a running container. | `docker restart 8f9a1c3b2d` |
-| `docker rm <id>` | Remove a container. | `docker rm 8f9a1c3b2d` |
-| `docker exec -it <id> bash` | Access container terminal interactively. | `docker exec -it 8f9a1c3b2d bash` |
+| `docker logs <id>` | View log of container. | `docker log 8f9a1c3b2d` |
 | `docker inspect <id>` | View container details (config, network, mounts, etc.). | `docker inspect 8f9a1c3b2d` |
-| `docker log <id>` | View log of container. | `docker log 8f9a1c3b2d` |
+| `docker exec -it <id> bash` | Access container terminal interactively. | `docker exec -it 8f9a1c3b2d bash` |
 | `docker attach <id>` | Attach terminal to running container. | `docker attach 8f9a1c3b2d` |
 
 ---
@@ -128,9 +128,12 @@ Before using Docker, ensure you have the following:
 | `-e` | Set environment variable inside container. | `docker run -e MYSQL_ROOT_PASSWORD=root mysql` |
 | `-it` | Allocate a pseudo-TTY (interactive terminal). | `docker run -it ubuntu` |
 | `-u` | Specify a username. | `docker exec -u root -it container bash` |
+| `-p` | for password. | `docker exec -p practice c-id` |
+| `-t` | to name image. | `docker build -t img_name .` |
 | `-h` | Assign hostname to container. | `docker run -h mycontainer ubuntu` |
 | `--name` | Assign a custom name to container. | `docker run --name myapp nginx` |
 | `--force` | Forcefully remove running container/image. | `docker rm --force myapp` |
+| `--driver` | Driver used when we create network want to to tell what kind of driver. | `docker network create --driver bridge network_name ` |
 
 ---
 
@@ -164,14 +167,14 @@ It defines what goes inside the image — such as base OS, dependencies, applica
 | `FROM` | Specifies the base image to use. | `FROM node:18` |
 | `WORKDIR` | Sets the working directory inside the container. | `WORKDIR /app` |
 | `COPY` | Copies files/folders from host to container. | `COPY . .` |
-| `ADD` | Similar to COPY but can also extract `.tar` files or fetch URLs. | `ADD app.tar.gz /app` |
 | `RUN` | Executes commands during image build (e.g., install dependencies). | `RUN npm install` |
-| `EXPOSE` | Informs Docker which port the container listens on. | `EXPOSE 3000` |
-| `ENV` | Sets environment variables inside the image. | `ENV NODE_ENV=production` |
 | `CMD` | Specifies default command to run when container starts . | `CMD ["node", "server.js"]` |
+| `EXPOSE` | Informs Docker which port the container listens on. | `EXPOSE 3000` |
 | `ENTRYPOINT` | Configures a container that will run as an executable. | `ENTRYPOINT ["npm", "start"]` |
-| `USER` | Sets the username or UID to use when running the image. | `USER node` |
+| `ENV` | Sets environment variables inside the image. | `ENV NODE_ENV=production` |
 | `LABEL` | Adds metadata to the image. | `LABEL version="1.0"` |
+| `ADD` | Similar to COPY but can also extract `.tar` files or fetch URLs. | `ADD app.tar.gz /app` |
+| `USER` | Sets the username or UID to use when running the image. | `USER node` |
 
 NOTE: `CMD` can be overwrite during container running ||
       `ENTRYPOINT` cannot be overwrite
@@ -270,9 +273,9 @@ Volumes are managed by Docker and can be easily shared between multiple containe
 | **Command** | **Description** | **Example** |
 |--------------|----------------|--------------|
 | `docker volume ls` | List all Docker volumes. | `docker volume ls` |
+| `docker volume rm <volume>` | Remove a specific volume. | `docker volume rm myvolume` |
 | `docker volume create <volume>` | Create a new volume. | `docker volume create myvolume` |
 | `docker volume inspect <volume>` | View detailed information about a volume. | `docker volume inspect myvolume` |
-| `docker volume rm <volume>` | Remove a specific volume. | `docker volume rm myvolume` |
 | `docker volume prune` | Remove all unused volumes. | `docker volume prune` |
 
 ---
@@ -360,6 +363,8 @@ volumes:
 
 networks:
   mynetwork:
+    driver: bridge
+
 ```
 
 ```bash
