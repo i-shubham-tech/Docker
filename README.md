@@ -114,6 +114,7 @@ Before using Docker, ensure you have the following:
 | `docker rm <id>` | Remove a container. | `docker rm 8f9a1c3b2d` |
 | `docker exec -it <id> bash` | Access container terminal interactively. | `docker exec -it 8f9a1c3b2d bash` |
 | `docker inspect <id>` | View container details (config, network, mounts, etc.). | `docker inspect 8f9a1c3b2d` |
+| `docker log <id>` | View log of container. | `docker log 8f9a1c3b2d` |
 | `docker attach <id>` | Attach terminal to running container. | `docker attach 8f9a1c3b2d` |
 
 ---
